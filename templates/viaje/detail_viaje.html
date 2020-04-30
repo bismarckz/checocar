@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  {{ object.full_name }}
+{% endblock title %}
+
+{% block content %}
+
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center">
+        <div class="cell large-4 card" style="width: 450px; margin-top: 10px;">
+            <div class="card-divider">
+                {{ viaje.get_job_display }}
+            </div>
+            {% if viaje.mapa %}
+            <iframe src="{{viaje.mapa }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            {% else %}
+                <img src="{% static 'img/20.jpg' %}" readonly>
+            {% endif %}
+
+            <div class="card-section">
+                <h4>Origen: </h4>  {{ viaje.origen }}
+                <h4>Destino: </h4> {{ viaje.destino }}
+                <h4>Fecha: </h4> {{ viaje.fecha }}
+                <h4>Horario: </h4> {{ viaje.horario }}
+
+
+            </div>
+
+            {% if user.is_authenticated %}
+
+            <form action="/confirmar_viaje/" method="get">
+              <p>Nombre: <input type="text" name="nombreCompleto" size="40" value={{user.username}} disabled></p>
+              <p>id_viaje: <input type="number" name="id_viaje" size="40" value={{viaje.id}} disabled></p>
+              <p>id_user: <input type="number" name="id_curso" size="40" value={{user.id}}  disabled></p>
+              <p>Numero de Pasajeros: <input type="number" name="pasajeros" min="1"  max="10" default=1></p>
+              <p>
+                <input type="submit" value="Apartar Lugar">
+              </p>
+
+          </form>
+                  <li>
+                    <a href="{% url 'viajes_app:viajes_all' %}">Regresar a la lista</a>
+                  </li>
+
+  <p>Lugares Disponibles    {{  viaje.lugares  }} </p>
+               {% else %}
+                  <li>
+                    <a href="{% url 'viajes_app:viajes_all' %}">Regresar a la lista</a>
+                  </li>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<h1>Detalle de usuarios {{ titulo }}</h1>
+{{ user }}
+
+<h3>Todos los datos:</h3>
+<p>{{ empleado.first_name }}</p>
+<p>{{ empleado.last_name }}</p>
+<p>{{ empleado.departamento }}</p>
+<p>{{ empleado.habilidades }}</p>

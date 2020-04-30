@@ -1,0 +1,31 @@
+<div class="top-bar">
+  <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+  {% if user.is_authenticated %}
+        <li class="menu-text">Bienvenido {{user.username}}</li>
+        <li>
+          <a href="{% url 'home_app:panel' %}">Inicio</a>
+        </li>
+        <li>
+          <a href="{% url 'users_app:user-logout' %}">Cerrar sesión</a>
+        </li>
+        <li>
+          <a href="{% url 'users_app:user-update' %}">Actualizar</a>
+        </li>
+     {% else %}
+        <li class="menu-text">  <a href="{% url 'home_app:panel' %}">ChecoCar</a></li>
+        <li>
+          <a href="{% url 'users_app:user-login' %}">Iniciar Sesion</a>
+        </li>
+      <li>
+        <a href="{% url 'users_app:user-register' %}">Registrar</a></li>
+  {% endif %}
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li><img src="{{ User.avatar.url}}"></li>
+
+      </ul>
+    </div>
+</div>

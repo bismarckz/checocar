@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  {{ object.full_name }}
+{% endblock title %}
+
+{% block content %}
+
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+  <div>
+
+    <p>{{ object.full_name }}</p>
+    <p>{{ object.last_name }}</p>
+    <p>{{ object.cell_num }}</p>
+    <p>{{ object.email }}</p>
+
+  </div>
+  Confirmar Viaje
+  <div>
+      <form method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Registrar</button>
+      </form>
+  </div>
+</div>
+{% endblock content %}

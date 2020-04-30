@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  {{ object.full_name }}
+{% endblock title %}
+
+{% block content %}
+
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center">
+        <div class="cell large-4 card" style="width: 300px; margin-top: 10px;">
+            <div class="card-divider">
+                {{ User.get_job_display }}
+            </div>
+            {% if User.avatar %}
+                <img src="{{ User.avatar.url}}">
+            {% else %}
+                <img src="{% static 'img/20.jpg' %}">
+            {% endif %}
+
+            <div class="card-section">
+                <p>{{ User.full_name }}</p>
+                <p>{{ User.last_name }}</p>
+                <p>{{ User.cell_num }}</p>
+                <p>{{ User.email }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<h1>Detalle de un User {{ titulo }}</h1>
+{{ User }}
+
+<h3>Todos los datos:</h3>
+<p>{{ empleado.first_name }}</p>
+<p>{{ empleado.last_name }}</p>
+<p>{{ empleado.cell_num }}</p>
+<p>{{ empleado.email }}</p>
